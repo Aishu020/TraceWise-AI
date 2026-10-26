@@ -339,18 +339,6 @@ Increase evaluation coverage where data permits, perform paired statistical anal
 
 Study how missing metrics, irregular sampling, noisy observations, and incomplete service information affect ranking accuracy and evidence reliability.
 
-### 12.9 Confidence and uncertainty estimation
-
-Investigate whether the system can estimate ranking uncertainty, flag ambiguous cases, and identify when available evidence is insufficient to support a confident recommendation.
-
-### 12.10 Reproducible experiments
-
-Develop a controlled experiment runner that records dataset versions, configuration parameters, random seeds, evaluation metrics, and output provenance for each new experiment.
-
-### 12.11 Online evaluation with real telemetry
-
-As a longer-term direction, investigate whether the offline research pipeline can be adapted to continuously arriving telemetry, with appropriate monitoring, data-quality checks, and independent evaluation before operational use.
-
 ---
 
 ## 13. Research Ethics and Responsible Interpretation
