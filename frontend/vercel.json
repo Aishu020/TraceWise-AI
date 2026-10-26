@@ -1,0 +1,9 @@
+
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://tracewise-ai.onrender.com/api/$1"
+    }
+  ]
+}
