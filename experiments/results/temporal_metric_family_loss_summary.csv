@@ -1,0 +1,6 @@
+metric_family,cases_evaluated,root_metric_available,root_detected,root_detection_pct,root_earliest,root_earliest_pct,root_top3,root_top3_pct
+cpu,19,19,17,89.5,6,31.6,12,63.2
+memory,19,19,8,42.1,4,21.1,7,36.8
+workload,19,19,0,0.0,0,0.0,0,0.0
+latency_p50,19,19,18,94.7,5,26.3,14,73.7
+latency_p90,19,19,17,89.5,4,21.1,10,52.6

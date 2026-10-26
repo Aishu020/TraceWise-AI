@@ -1,0 +1,4 @@
+method,hit1_wrong_to_correct,hit1_correct_to_wrong,hit3_outside_to_inside,hit3_inside_to_outside
+All-metric median,2,1,3,3
+All-metric mean,1,0,1,0
+Top-two maximum,1,1,2,3

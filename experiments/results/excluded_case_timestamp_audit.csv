@@ -1,0 +1,3 @@
+case,root_cause_service,fault,recorded_injection_time,telemetry_start,telemetry_end,telemetry_rows,injection_within_telemetry,reason,decision
+re1ob_currencyservice_loss_1,currencyservice,loss,16933142,1693313863,1693314583,721,False,Injection timestamp in the manifest and source text file does not fall within the telemetry interval. The intended timestamp cannot be verified from these files alone.,Exclude pending source verification
+re1ob_productcatalogservice_cpu_3,productcatalogservice,cpu,1685373255,1685371737,1685371799,63,False,Telemetry ends 1456 seconds before the recorded injection. No post-injection observations are available in the current file.,Exclude pending source verification

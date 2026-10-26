@@ -1,0 +1,3 @@
+dataset,case,root_cause_service,fault,inject_time,n_metrics,n_logs,n_traces
+RE1-OB,re1ob_currencyservice_loss_1,currencyservice,loss,16933142,59,0,0
+RE1-OB,re1ob_productcatalogservice_cpu_3,productcatalogservice,cpu,1685373255,58,0,0

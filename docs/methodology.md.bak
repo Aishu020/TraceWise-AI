@@ -1,0 +1,155 @@
+﻿# Experiments
+
+This directory contains the evaluation protocol, benchmark scripts,
+diagnostic analyses, and result artifacts for TraceWise AI.
+
+## Current evaluation status
+
+The candidate has been evaluated on 98 exploratory RCAEval cases.
+This set has informed development and is not an independent validation set.
+
+The frozen candidate is the V2 all-metric mean method:
+
+- Robust scale: 1.4826 × median absolute deviation (MAD)
+- Relative scale floor: 1% of the absolute pre-fault median
+- Metric score: absolute post/pre median change divided by effective scale
+- Service score: arithmetic mean of all available metric scores
+- Ranking: competition ranking; tied scores share a rank
+- Pre-fault window: injection time −300 to −60 seconds, inclusive
+- Post-fault window: injection time +60 to +300 seconds, inclusive
+
+Two cases remain excluded pending authoritative timestamp verification
+or suitable replacement data. See
+`results/excluded_case_timestamp_audit.md`.
+
+## Exploratory results
+
+| Version | Hit@1 | Hit@3 | MRR | Mean correct-service rank |
+|---|---:|---:|---:|---:|
+| V1 | 58.16% | 70.41% | 0.686152 | 2.8061 |
+| V2, 1% scale floor | 64.29% | 78.57% | 0.737366 | 2.4592 |
+
+These results are exploratory on a development-informed set. They do not
+establish independent validation, generalization to unseen datasets, or
+causal root-cause identification.
+
+## Main artifacts
+
+- `tracewise_protocol.json` — evaluation protocol and limitations
+- `evaluate_locked_candidate.py` — frozen-candidate evaluator
+- `reproduce_locked_candidate_98.py` — reproduction with separate outputs
+- `EVALUATION_PROVENANCE.md` — evaluation history and provenance
+- `results/locked_candidate_98_summary.csv` — frozen-candidate summary
+- `results/reproduction_locked_candidate_98_summary.csv` — reproduced summary
+- `results/excluded_case_timestamp_audit.md` — excluded-case audit
+
+Historical scripts and results are retained for traceability. Do not rerun
+`evaluate_heldout_99.py` without reviewing its manifest, ranking logic,
+printed case count, and output destinations.
+
+## Reproduction
+
+From the repository root, activate the backend virtual environment and run:
+
+```powershell
+python .\experiments\reproduce_locked_candidate_98.py
+
+## Step 3B — Restore `docs/methodology.md`
+
+This command rewrites the methodology file with just the methodology content, removing the accidental duplicate document:
+
+```powershell
+@'
+# Research methodology (working draft)
+
+## Research question
+
+Can evidence-aware root-cause ranking remain useful and appropriately
+cautious when telemetry is incomplete or noisy, while making its
+reasoning inspectable by a developer?
+
+## Scope
+
+TraceWise AI is a local research prototype for microservice incident
+investigation. Its intended workflow ingests timestamped event records,
+extracts signals, ranks candidate explanations, links hypotheses to
+observed evidence, and presents counter-evidence and diagnostic checks.
+
+The repository contains two distinct components:
+
+1. A developer-facing prototype with illustrative synthetic incident records.
+2. A separate experimental evaluation pipeline for labelled RCAEval cases.
+
+The benchmark evaluator is not evidence that the UI's scenario controls
+run the benchmark pipeline.
+
+## Current implementation
+
+The UI/API prototype uses a deterministic, interpretable heuristic
+baseline. Its documented signal families include database or pool
+pressure, timeouts or latency, and retries. A modest temporal boost is
+used when a pool signal precedes a timeout.
+
+The separate benchmark candidate calculates metric-level scores from
+pre-fault and post-fault medians, scales changes using robust dispersion
+with a relative scale floor, and aggregates available metric scores into
+service-level rankings.
+
+These methods produce relative scores. They are not calibrated
+probabilities, and neither temporal order nor a high ranking proves
+causation.
+
+## Benchmark protocol
+
+The frozen candidate is V2 all-metric mean:
+
+- Robust scale: 1.4826 × median absolute deviation
+- Effective scale: maximum of robust scale, 1% of the absolute pre-fault
+  median, and 1e-9
+- Metric score: absolute post/pre median change divided by effective scale
+- Service aggregation: arithmetic mean of available metric scores
+- Ranking: competition ranking, with ties sharing the same rank
+- Pre-fault window: injection time −300 to −60 seconds, inclusive
+- Post-fault window: injection time +60 to +300 seconds, inclusive
+
+The evaluation uses 98 exploratory RCAEval cases. Two cases were
+excluded because their recorded injection timestamps were incompatible
+with available telemetry. The source timestamps have not been silently
+changed. Details are recorded in
+`experiments/results/excluded_case_timestamp_audit.md`.
+
+## Exploratory results
+
+| Version | Hit@1 | Hit@3 | MRR | Mean correct-service rank |
+|---|---:|---:|---:|---:|
+| V1 | 58.16% | 70.41% | 0.686152 | 2.8061 |
+| V2, 1% scale floor | 64.29% | 78.57% | 0.737366 | 2.4592 |
+
+V2 reports better ranking metrics on this 98-case exploratory evaluation.
+Because the set has informed development, this is not independent
+validation and does not establish generalization to unseen datasets.
+
+The reproduction script generated matching case-result, service-ranking,
+metric-evidence, and summary outputs from the current implementation and
+inputs. This supports reproducibility of the saved outputs, not external
+validity.
+
+## Proposed further evaluation
+
+- Review relevant literature and compare with suitable published baselines.
+- Resolve excluded cases only with authoritative metadata or replacement data.
+- Establish an independent validation set or defensible untouched split.
+- Inject controlled missing telemetry and noise with fixed random seeds.
+- Report Hit@1, Hit@3, mean reciprocal rank, and appropriate uncertainty.
+- Run ablations for temporal features, service relationships, and evidence filtering.
+- If abstention is implemented, report coverage alongside selective risk.
+- Assess calibration only where the output and experimental design support it.
+
+## Validity and safety limitations
+
+A timestamp order is not proof of causation. Heuristic ranking scores
+are not probabilities. Synthetic incidents are for UI development only.
+The 98-case evaluation is exploratory, and independent validation is not
+currently available. Claims must be restricted to documented experiments.
+
+Do not use this prototype to trigger automated production remediation.

@@ -1,0 +1,4 @@
+pandas>=2.2,<3.0
+pyarrow>=25,<27
+huggingface_hub>=0.26,<2.0
+fsspec>=2024.9

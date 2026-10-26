@@ -1,0 +1,69 @@
+﻿{
+    "project":  "TraceWise AI",
+    "protocol_version":  "1.0",
+    "status":  "candidate_frozen_pending_implementation_audit",
+    "dataset":  "RCAEval",
+    "manifests":  {
+                      "original":  "data/rcaeval_case_manifest.csv",
+                      "tuning":  "data/rcaeval_25_case_evaluation.csv",
+                      "exploratory":  "data/rcaeval_heldout_98.csv"
+                  },
+    "candidate_method":  {
+                             "name":  "V2 all-metric mean",
+                             "scale_floor_ratio":  0.01,
+                             "scale_floor_description":  "1% of absolute pre-fault median",
+                             "robust_scale":  "1.4826 * median absolute deviation",
+                             "effective_scale":  "max(robust_scale, 0.01 * abs(pre_fault_median), 1e-9)",
+                             "metric_score":  "abs(post_fault_median - pre_fault_median) / effective_scale",
+                             "service_aggregation":  "arithmetic mean of available metric scores"
+                         },
+    "evaluation":  {
+                       "primary_metric":  "Hit@1",
+                       "secondary_metrics":  [
+                                                 "Hit@3",
+                                                 "MRR",
+                                                 "mean correct-service rank"
+                                             ],
+                       "baseline_comparison":  "V1 versus V2 all-metric mean",
+                       "exploratory_case_count":  98,
+                       "tuning_case_count":  25,
+                       "independent_validation_available":  false
+                   },
+    "data_quality":  {
+                         "excluded_cases":  [
+                                                {
+                                                    "case":  "re1ob_currencyservice_loss_1",
+                                                    "reason":  "Recorded injection timestamp falls outside available telemetry interval; source timestamp remains unverified."
+                                                },
+                                                {
+                                                    "case":  "re1ob_productcatalogservice_cpu_3",
+                                                    "reason":  "Available telemetry ends 1456 seconds before recorded injection time."
+                                                }
+                                            ],
+                         "audit_file":  "experiments/results/excluded_case_timestamp_audit.md"
+                     },
+    "reproducibility":  {
+                            "use_same_case_manifests":  true,
+                            "use_same_pre_post_windows_for_method_comparisons":  true,
+                            "verify_window_and_tie_implementation_before_final_release":  true,
+                            "do_not_tune_on_exploratory_results":  true,
+                            "do_not_claim_causal_root_cause_proof":  true
+                        },
+    "baseline_method_details":  {
+                                    "V1":  {
+                                               "name":  "Robust-scale baseline",
+                                               "robust_scale":  "1.4826 * median absolute deviation",
+                                               "fallback_condition":  "robust_scale \u003c= 1e-12",
+                                               "fallback_scale":  "max(0.05 * abs(pre_fault_median), 1e-9)",
+                                               "metric_score":  "abs(post_fault_median - pre_fault_median) / effective_scale",
+                                               "service_aggregation":  "arithmetic mean of all available metric scores"
+                                           },
+                                    "V2":  {
+                                               "name":  "V2 all-metric mean",
+                                               "robust_scale":  "1.4826 * median absolute deviation",
+                                               "effective_scale":  "max(robust_scale, 0.01 * abs(pre_fault_median), 1e-9)",
+                                               "metric_score":  "abs(post_fault_median - pre_fault_median) / effective_scale",
+                                               "service_aggregation":  "arithmetic mean of all available metric scores"
+                                           }
+                                }
+}

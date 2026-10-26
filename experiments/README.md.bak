@@ -1,0 +1,14 @@
+# Experiments
+
+This folder is reserved for reproducible evaluation scripts. The current release contains an interpretable heuristic baseline and synthetic incident examples; it does **not** contain measured benchmark results.
+
+Recommended next steps:
+
+1. Select and review a public microservice RCA benchmark such as RCAEval.
+2. Check its license, dataset documentation, and supported train/test protocol.
+3. Implement a baseline that can be evaluated on the selected labels.
+4. Add controlled missingness and noise using fixed random seeds.
+5. Report Hit@1, Hit@3, mean reciprocal rank, and risk-versus-coverage for abstention.
+6. Run ablations to understand whether each feature family improves results.
+
+Do not mix the synthetic UI examples with benchmark measurements in a paper or README results table.

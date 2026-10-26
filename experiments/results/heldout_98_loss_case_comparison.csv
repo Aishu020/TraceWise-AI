@@ -1,0 +1,20 @@
+case,fault,known_root_cause,All-metric mean,All-metric median,Top-two maximum,Top-two mean,All-metric median_rank_gain,All-metric mean_rank_gain,Top-two maximum_rank_gain
+re1ob_adservice_loss_2,loss,adservice,1.0,1.0,1.0,1.0,0.0,0.0,0.0
+re1ob_adservice_loss_3,loss,adservice,1.0,1.0,1.0,1.0,0.0,0.0,0.0
+re1ob_adservice_loss_4,loss,adservice,10.0,7.0,11.0,10.0,3.0,0.0,-1.0
+re1ob_adservice_loss_5,loss,adservice,3.0,3.0,4.0,3.0,0.0,0.0,-1.0
+re1ob_cartservice_loss_2,loss,cartservice,9.0,8.0,9.0,10.0,2.0,1.0,1.0
+re1ob_cartservice_loss_3,loss,cartservice,5.0,4.0,5.0,5.0,1.0,0.0,0.0
+re1ob_cartservice_loss_4,loss,cartservice,3.0,1.0,3.0,3.0,2.0,0.0,0.0
+re1ob_cartservice_loss_5,loss,cartservice,12.0,11.0,12.0,12.0,1.0,0.0,0.0
+re1ob_checkoutservice_loss_2,loss,checkoutservice,4.0,4.0,7.0,5.0,1.0,1.0,-2.0
+re1ob_checkoutservice_loss_3,loss,checkoutservice,4.0,4.0,2.0,4.0,0.0,0.0,2.0
+re1ob_checkoutservice_loss_4,loss,checkoutservice,3.0,3.0,4.0,3.0,0.0,0.0,-1.0
+re1ob_checkoutservice_loss_5,loss,checkoutservice,5.0,4.0,6.0,6.0,2.0,1.0,0.0
+re1ob_currencyservice_loss_3,loss,currencyservice,5.0,4.0,8.0,6.0,2.0,1.0,-2.0
+re1ob_currencyservice_loss_4,loss,currencyservice,4.0,2.0,4.0,4.0,2.0,0.0,0.0
+re1ob_currencyservice_loss_5,loss,currencyservice,5.0,3.0,5.0,5.0,2.0,0.0,0.0
+re1ob_productcatalogservice_loss_2,loss,productcatalogservice,3.0,10.0,2.0,3.0,-7.0,0.0,1.0
+re1ob_productcatalogservice_loss_3,loss,productcatalogservice,3.0,7.0,2.0,3.0,-4.0,0.0,1.0
+re1ob_productcatalogservice_loss_4,loss,productcatalogservice,4.0,12.0,4.0,4.0,-8.0,0.0,0.0
+re1ob_productcatalogservice_loss_5,loss,productcatalogservice,3.0,8.0,3.0,3.0,-5.0,0.0,0.0
