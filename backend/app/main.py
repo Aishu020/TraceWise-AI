@@ -1,4 +1,5 @@
 """TraceWise AI local API."""
+import os
 from copy import deepcopy
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,9 +14,20 @@ app = FastAPI(
 )
 app.include_router(rcaeval_router)
 
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv("FRONTEND_ORIGIN", "").split(",")
+    if origin.strip()
+]
+
+allowed_origins.extend([
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
