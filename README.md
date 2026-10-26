@@ -364,7 +364,9 @@ The central research goal is not simply to produce a ranked list of services, bu
 - **Dataset:** RCAEval. Add the official dataset paper, repository, and applicable license or usage terms before public release.
 - **Experimental details:** See the evaluation report, provenance document, frozen protocol, and saved CSV artifacts in the `experiments/` directory.
 
-  ##ScreenShot
+  ---
+
+## ScreenShots
 
   <img width="944" height="440" alt="image" src="https://github.com/user-attachments/assets/9ec3509c-0fa6-4180-a1b1-3834ff513ad2" />
 
